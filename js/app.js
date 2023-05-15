@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 const startBtn = document.querySelector('#start');
 
@@ -9,6 +9,8 @@ const timeList = document.querySelector('#time-list');
 const timeEl = document.querySelector('#time');
 
 const board = document.querySelector('#board');
+
+const colors = ['#8ecae6', '#219ebc', '#023047', '#ffb703', '#fb8500'];
 
 let time = 0;
 let score = 0;
@@ -48,6 +50,12 @@ function decreaseTime() {
         let current = --time;
         if (current < 10) {
         current = `0${current}`;
+        if (current % 2 !== 0) {
+            timeEl.parentNode.classList.add('red');
+        } else {
+            timeEl.parentNode.classList.remove('red');
+        }
+
         }
         setTime(current);
     }
@@ -61,7 +69,15 @@ function setTime(value) {
 function finishGame() {
     //timeEl.parentNode.remove();
     timeEl.parentNode.classList.add('hide');
-    board.innerHTML = `<h1>Счет: <span class = "primary">${score}</span></h1>`
+    board.innerHTML = `<h1 class ="score">Счет: <span class = "primary">${score}</span></h1>`
+    // for (let i = 300; (i > 0); i--) {
+    //     //let randomCircleLoop = setInterval(createRandomCircle, 50);
+    //     //randomCircleLoop();
+    //     //clearInterval(randomCircleLoop);
+    //     createRandomCircle();
+    //     //setInterval(createRandomCircle, 50);
+    // }
+    setInterval(createRandomCircle, 50);
 }
 
 function createRandomCircle() {
@@ -72,6 +88,8 @@ function createRandomCircle() {
     const x = getRandomNumber(0, width - size);
     const y = getRandomNumber(0, height - size)
     //деструктуризация
+
+    setColor(circle);
 
     circle.classList.add('circle');
     circle.style.width = `${size}px`;
@@ -84,4 +102,15 @@ function createRandomCircle() {
 
 function getRandomNumber(min, max) {
  return Math.round(Math.random() * (max - min) + min) 
+}
+
+function setColor (element) {
+    const color = getRandomColor();
+    element.style.backgroundColor = color; // `${color}`
+    element.style.boxShadow = `0 0 50px ${color}`;
+}
+
+function getRandomColor () {
+    const index = Math.floor(Math.random() * colors.length);
+    return colors[index];
 }

@@ -87,11 +87,21 @@ h1 {
     box-shadow: -8px -8px 20px #2A333D, 10px 7px 20px #485563;
     border-radius: 30px;
     overflow: hidden;
+    margin-top: 20px;
 }
 
 .circle {
-    background: linear-gradient(90deg, #16D9E3 0%, #30C7EC 47%, #46AEF7 100%);
     position: absolute;
     border-radius: 50%;
     cursor: pointer;
+    z-index: 10;
+}
+
+.score {
+    z-index: 20;
+    text-shadow: 2px 5px 10px #29323c;
+}
+
+.red {
+    color: red;
 }
